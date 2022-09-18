@@ -66,7 +66,6 @@ export default function Home() {
     setStatus(status);
     addWalletListener();
     setStartDate(String(new Date().toUTCString()))
-
     getTotalStaked();
     getTokens();
 
@@ -81,6 +80,7 @@ export default function Home() {
       window.ethereum.on("accountsChanged", (accounts) => {
         if (accounts.length > 0) {
           setWallet(accounts[0]);
+          getTokens(accounts[0]);
           setStatus("👆🏽 Write a message in the text-field above.");
         } else {
           setWallet("");
@@ -104,8 +104,8 @@ export default function Home() {
 
 
 
-  const getTokens = async () => {
-    var userWalletAddress = window.localStorage.getItem("walletAddress");
+  const getTokens = async (userWalletAddress) => {
+    //var userWalletAddress = window.localStorage.getItem("walletAddress");
     var userAddress = userWalletAddress.toLowerCase();
     const etherscan = await axios.get(endpoint + `?module=account&action=tokenbalance&contractaddress=${contractAddress}&address=${userAddress}&tag=latest&apikey=${apikey}`);
 
