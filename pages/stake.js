@@ -62,9 +62,9 @@ export default function Home() {
 
   useEffect(async () => {
     const { address, status } = await getCurrentWalletConnected();
-    await setWallet(address).then(() => {
-      getTokens(address)
-    })
+    setWallet(address)
+    getTokens(address)
+
     setStatus(status);
     addWalletListener();
     setStartDate(String(new Date().toUTCString()))
@@ -82,6 +82,7 @@ export default function Home() {
       window.ethereum.on("accountsChanged", (accounts) => {
         if (accounts.length > 0) {
           setWallet(accounts[0]);
+          getTokens(address);
 
           setStatus("👆🏽 Write a message in the text-field above.");
         } else {
