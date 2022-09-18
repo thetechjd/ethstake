@@ -25,6 +25,7 @@ export default function Home() {
   const [count, setCount] = useState(1);
   const [totalMinted, setTotalMinted] = useState(0);
   const [price, setPrice] = useState(0);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
 
   useEffect(async () => {
@@ -101,73 +102,146 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Squidsqui</title>
-        <meta name="description" content="Squidsqui Dapp" />
-        <link rel="icon" href="/favicon.webp" />
+        <title>ETHSTAKE</title>
+        <meta name="description" content="ETHSTAKE Dapp" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       {/* Header */}
-      <header className='fixed w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 backdrop-blur transition-colors duration-500 z-40 flex-none md:z-50 bg-white/35 supports-backdrop-blur:bg-white/60 shadow-[0_2px_5px_rgba(3,0,16,0.2)]'>
+      <header className='fixed w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 transition-colors duration-500 z-40 flex-none md:z-50 bg-header'>
 
         {/* Header Container */}
         <div className='flex h-full items-center justify-center max-w-11xl mx-auto border-opacity-0'>
 
           {/* Logo Section */}
+
           <div className='flex-grow'>
             <div className='flex'>
               <Link className='w-min-content' href='/' passHref>
                 <a className='flex'>
-                  <img alt='' src='/images/squidsqui_logo.webp' className='h-[40px]' />
-                  <p className='h-7 px-2 pt-1 pb-1 rounded uppercase text-lg font-gray-100
-                  text-gray-100 hidden md:flex'>SquidSqui Official <span className='font-extrabold text-sky-500 uppercase mb-3 md:mb-8'> Mint</span>
+                  <img alt='' src='/images/bull_logo.png' className='h-[80px]' />
 
-                  </p>
                 </a>
               </Link>
             </div>
           </div>
 
-          {/* Desktop Navbar Section + Connect Wallet + icons */}
-          <div className='items-center md:flex text-sm'>
-            <ul className='flex space-x-2'>
+
+
+          <nav>
+
+            <section className="MOBILE-MENU flex lg:hidden">
+              <div
+                className="HAMBURGER-ICON space-y-2"
+                onClick={() => setIsNavOpen((prev) => !prev)}
+              >
+                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
+                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
+                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
+              </div>
+
+              <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
+                <div
+                  className="absolute top-0 right-0 px-8 py-8"
+                  onClick={() => setIsNavOpen(false)}
+                >
+                  <svg
+                    className="h-8 w-8 text-gray-600"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                <div className=''>
+                  <ul className="flex flex-col items-center justify-between min-h-[250px]">
+
+                    <li className="border-b text-white border-gray-400 my-2 uppercase">
+                      <a href="/stake">Stake</a>
+                    </li>
+                    <li>
+                      {walletAddress.length > 0 ? (
+
+                        <div className='px-4 bg-opacity-20 text-white items-center relative h-9 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
+                        >
+                          {String(walletAddress).substring(0, 6)}
+                          {"....."}
+                          {String(walletAddress).substring(39)}
+                        </div>
+                      ) : (
+
+                        <button className='px-4 bg-titanium bg-opacity-100 text-gray-100 items-center relative h-9 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
+
+                          onClick={connectWalletPressed}
+                        >Connect
+                        </button>
+                      )}
+                    </li>
+
+
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <ul className="DESKTOP-MENU hidden space-x-2 lg:flex">
+
+              <li>
+                <a href="/stake" className='hidden sm:flex bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-9 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
+                  <p className='rounded uppercase text-lg font-black
+          text-white md:flex'>Stake</p>
+                </a>
+              </li>
 
               {/* CONNECT WALLET */}
               <li>
                 {walletAddress.length > 0 ? (
-                  <div className='px-4 bg-opacity-20 text-gray-100 items-center relative h-7 tracking-wider pt-0.5 first::pt-0 duration-500 text-sm md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-bluee hover:shadow-green-500/20 cursor-pointer'
+
+                  <div className='px-4 bg-opacity-20 text-white items-center relative h-9 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
                   >
-                    Connected:  {String(walletAddress).substring(0, 6)}
+                    {String(walletAddress).substring(0, 6)}
                     {"....."}
                     {String(walletAddress).substring(39)}
                   </div>
                 ) : (
-                  <a className='px-4 bg-opacity-20 text-gray-100 font-semibold items-center relative h-7 tracking-wider pt-0.5 first::pt-0 duration-500 text-sm md:text-base padding-huge bg-bluee opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-cyan-200 to-cyan-500 hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer'
-                    id="walletButton"
+
+                  <button className='px-4 bg-titanium bg-opacity-100 text-gray-100 items-center relative h-9 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
+
                     onClick={connectWalletPressed}
-                  >Connect Wallet
-                  </a>
+                  >Connect
+                  </button>
                 )}
               </li>
 
-              {/* Twitter Icon */}
-              <li className='hidden md:flex'>
-                <a className='bg-opacity-20 text-gray-100 opacity-80 items-center relative h-7 tracking-wider pt-0.5 first::pt-0 uppercase text-2xs font-500 padding-huge bg-white duration-200 px-4 hover:bg-opacity-70 rounded flex justify-center flex-row transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110' href='https://twitter.com/SquidSquiNFT' target='_blank' rel='noreferrer'>
-                  <svg xmlns="http://www.w3.org/2000/svg" className=" fill-current stroke-current h-4 w-4" viewBox="0 0 40 40"><path d="M38.526 8.625a15.199 15.199 0 01-4.373 1.198 7.625 7.625 0 003.348-4.211 15.25 15.25 0 01-4.835 1.847 7.6 7.6 0 00-5.557-2.404c-4.915 0-8.526 4.586-7.416 9.346-6.325-.317-11.934-3.347-15.69-7.953C2.01 9.869 2.97 14.345 6.358 16.612a7.58 7.58 0 01-3.446-.953c-.084 3.527 2.444 6.826 6.105 7.56a7.63 7.63 0 01-3.438.13 7.618 7.618 0 007.112 5.286A15.306 15.306 0 011.42 31.79a21.55 21.55 0 0011.67 3.42c14.134 0 22.12-11.937 21.637-22.643a15.499 15.499 0 003.799-3.941z"></path></svg>
-                </a>
-              </li>
-              {/* Discord Icon */}
-              <li className='hidden md:flex'>
-                <a className='bg-opacity-20 text-gray-100 opacity-80 items-center relative h-7 tracking-wider pt-0.5 first::pt-0 uppercase text-2xs font-500 padding-huge bg-white duration-200 px-4 hover:bg-opacity-70 rounded flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110' href='http://discord.gg/squidsqui'>
-                  <span className="text-black text-xs hidden hover:visible absolute top-[-6px]">Closed </span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="fill-current stroke-current h-4 w-4" viewBox="0 0 40 40"><path d="M33.567 7.554a32.283 32.283 0 00-7.969-2.472.12.12 0 00-.128.06c-.344.613-.725 1.411-.992 2.039a29.804 29.804 0 00-8.95 0 20.625 20.625 0 00-1.008-2.038.126.126 0 00-.128-.06 32.194 32.194 0 00-7.968 2.47.114.114 0 00-.053.046C1.296 15.18-.095 22.577.588 29.88c.003.036.023.07.05.092 3.349 2.459 6.593 3.952 9.776 4.941a.127.127 0 00.137-.045 23.203 23.203 0 002-3.253.124.124 0 00-.068-.172A21.379 21.379 0 019.43 29.99a.126.126 0 01-.012-.209c.205-.153.41-.313.607-.475a.121.121 0 01.126-.017c6.407 2.925 13.343 2.925 19.675 0a.12.12 0 01.128.015c.196.162.4.324.608.477a.126.126 0 01-.011.209c-.975.57-1.99 1.051-3.055 1.454a.125.125 0 00-.067.173 26.052 26.052 0 001.998 3.252c.031.043.087.062.138.046 3.199-.99 6.442-2.482 9.79-4.941a.126.126 0 00.052-.09c.816-8.445-1.368-15.78-5.789-22.283a.1.1 0 00-.05-.046zm-20.06 17.88c-1.928 0-3.517-1.771-3.517-3.946 0-2.175 1.558-3.946 3.518-3.946 1.975 0 3.549 1.787 3.518 3.946 0 2.175-1.558 3.946-3.518 3.946zm13.01 0c-1.93 0-3.52-1.771-3.52-3.946 0-2.175 1.56-3.946 3.52-3.946 1.974 0 3.548 1.787 3.517 3.946 0 2.175-1.543 3.946-3.518 3.946z"></path></svg>
-                </a>
-              </li>
             </ul>
-          </div>
-
+          </nav>
+          <style>{`
+      .hideMenuNav {
+        display: none;
+      }
+      .showMenuNav {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background: #210234;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+    `}</style>
         </div>
-      </header>
 
+      </header>
       {/* Hero/Mint Section */}
       <section className="flex items-center justify-center bg-pattern py-12 px-5 overflow-hidden relative z-10" id="">
         <div className="">
