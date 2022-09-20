@@ -345,7 +345,7 @@ export default function Home() {
       <Head>
         <title>SoccerGold Stake</title>
         <meta name="description" content="Soccer Gold Stake Dapp" />
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="/images/favicon.png" />
       </Head>
 
       {/* Header */}

@@ -105,7 +105,7 @@ export default function Home() {
       <Head>
         <title>SoccerGoldNFT</title>
         <meta name="description" content="Soccer Gold NFT Dapp" />
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="/images/favicon.png" />
       </Head>
 
       {/* Header */}
@@ -204,14 +204,14 @@ export default function Home() {
             {/* Left Hero Section - Mint Info */}
             <div className="w-full px-4">
               <div className="max-w-[570px] mb-12 md:mb-0">
-                <p className="text-2xl text-center md:text-5xl font-extrabold text-gray-100 leading-relaxed  bg-clip-text mt-6 mb-3 md:mb-8 md:-mx-4">
+                <p className="text-2xl text-center md:text-5xl font-extrabold text-gray-100 leading-relaxed  bg-clip-text mt-6 mb-3 md:mb-8">
                   Mint SoccerGoldNFT
                 </p>
 
                 <div className="w-full px-4">
                   <div className="relative rounded-md pb-0 p-4 mb-4">
 
-                    <img src='/images/soccergoldfloater.png' alt='floater' className='floating w-[400px] flex items-center justify-center' />
+                    <img src='/images/soccergoldfloater.png' alt='floater' className='floating w-[500px] flex items-center justify-center' />
                   </div>
                 </div>
               </div>
