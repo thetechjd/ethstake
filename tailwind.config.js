@@ -12,6 +12,9 @@ module.exports = {
         'md': '1000px',
         'xs': '540px'
       },
+      animation: {
+        'bounce-slow': 'bounce 3s linear infinite',
+      },
       fontFamily: {
         "josefin": ["Josefin Sans", ...defaultTheme.fontFamily.mono],
         "inter": ["Inter", ...defaultTheme.fontFamily.mono],
@@ -35,7 +38,8 @@ module.exports = {
         pinkk: 'var(--clr-pink)',
         yelloww: 'var(--clr-yellow)',
         bluee: 'var(--clr-blue)',
-        greenn: 'var(--clr-green)',
+        darkblue: '#3254FF',
+        greenn: '#3AAA35',
         white: 'var(--clr-white)',
         background: 'var(--clr-background)'
       },

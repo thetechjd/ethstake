@@ -3,6 +3,7 @@ import { createAlchemyWeb3 } from "@alch/alchemy-web3";
 import { useEffect, useState } from "react";
 import Link from 'next/link';
 import Head from 'next/head';
+import Footer from '../components/Footer';
 import ProgressBar from '../components/ProgressBar';
 import { useStatus } from "../context/statusContext";
 import { connectWallet, getCurrentWalletConnected, getNFTPrice, getTotalMinted } from "../utils/interact.js";
@@ -102,13 +103,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ETHSTAKE</title>
-        <meta name="description" content="ETHSTAKE Dapp" />
+        <title>SoccerGoldNFT</title>
+        <meta name="description" content="Soccer Gold NFT Dapp" />
         <link rel="icon" href="/favicon.png" />
       </Head>
 
       {/* Header */}
-      <header className='fixed w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 transition-colors duration-500 z-40 flex-none md:z-50 bg-header'>
+      <header className='w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 transition-colors duration-500 z-40 border-b border-1 border-gray-400 border-opacity-40 flex-none md:z-50 bg-pattern'>
 
         {/* Header Container */}
         <div className='flex h-full items-center justify-center max-w-11xl mx-auto border-opacity-0'>
@@ -119,7 +120,9 @@ export default function Home() {
             <div className='flex'>
               <Link className='w-min-content' href='/' passHref>
                 <a className='flex'>
-                  <img alt='' src='/images/bull_logo.png' className='h-[80px]' />
+                  <img alt='' src='/images/logo-text.png' className='hidden md:flex h-[40px]' />
+                  <img alt='' src='/images/soccergoldlogo.png' className='md:hidden h-[40px]' />
+
 
                 </a>
               </Link>
@@ -130,69 +133,12 @@ export default function Home() {
 
           <nav>
 
-            <section className="MOBILE-MENU flex lg:hidden">
-              <div
-                className="HAMBURGER-ICON space-y-2"
-                onClick={() => setIsNavOpen((prev) => !prev)}
-              >
-                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
-                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
-                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
-              </div>
-
-              <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
-                <div
-                  className="absolute top-0 right-0 px-8 py-8"
-                  onClick={() => setIsNavOpen(false)}
-                >
-                  <svg
-                    className="h-8 w-8 text-gray-600"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </div>
-                <div className=''>
-                  <ul className="flex flex-col items-center justify-between min-h-[250px]">
-
-                    <li className="border-b text-white border-gray-400 my-2 uppercase">
-                      <a href="/stake">Stake</a>
-                    </li>
-                    <li>
-                      {walletAddress.length > 0 ? (
-
-                        <div className='px-4 bg-opacity-20 text-white items-center relative h-9 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
-                        >
-                          {String(walletAddress).substring(0, 6)}
-                          {"....."}
-                          {String(walletAddress).substring(39)}
-                        </div>
-                      ) : (
-
-                        <button className='px-4 bg-titanium bg-opacity-100 text-gray-100 items-center relative h-9 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
-
-                          onClick={connectWalletPressed}
-                        >Connect
-                        </button>
-                      )}
-                    </li>
 
 
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            <ul className="DESKTOP-MENU hidden space-x-2 lg:flex">
+            <ul className="DESKTOP-MENU space-x-2 flex flex-row">
 
               <li>
-                <a href="/stake" className='hidden sm:flex bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-9 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
+                <a href="/stake" className='flex-none bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-12 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
                   <p className='rounded uppercase text-lg font-black
           text-white md:flex'>Stake</p>
                 </a>
@@ -202,7 +148,7 @@ export default function Home() {
               <li>
                 {walletAddress.length > 0 ? (
 
-                  <div className='px-4 bg-opacity-20 text-white items-center relative h-9 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
+                  <div className='px-4 bg-opacity-20 text-white items-center relative h-12 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
                   >
                     {String(walletAddress).substring(0, 6)}
                     {"....."}
@@ -210,10 +156,10 @@ export default function Home() {
                   </div>
                 ) : (
 
-                  <button className='px-4 bg-titanium bg-opacity-100 text-gray-100 items-center relative h-9 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
+                  <button className='px-4 bg-greenn bg-opacity-100 text-gray-100 items-center relative h-12 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
 
                     onClick={connectWalletPressed}
-                  >Connect
+                  >Connect Wallet
                   </button>
                 )}
               </li>
@@ -231,7 +177,7 @@ export default function Home() {
         height: 100vh;
         top: 0;
         left: 0;
-        background: #210234;
+        background: #fff;
         z-index: 10;
         display: flex;
         flex-direction: column;
@@ -242,6 +188,11 @@ export default function Home() {
         </div>
 
       </header>
+
+
+
+
+
       {/* Hero/Mint Section */}
       <section className="flex items-center justify-center bg-pattern py-12 px-5 overflow-hidden relative z-10" id="">
         <div className="">
@@ -253,16 +204,14 @@ export default function Home() {
             {/* Left Hero Section - Mint Info */}
             <div className="w-full px-4">
               <div className="max-w-[570px] mb-12 md:mb-0">
-                <p className="text-2xl text-center md:text-4xl font-extrabold text-body-color leading-relaxed text-transparent bg-clip-text bg-gradient-to-tl stand__out__text from-bluee via-sky-500 to-greenn uppercase mb-3 md:mb-8 md:-mx-4">
-                  Mint Squidsqui Now
+                <p className="text-2xl text-center md:text-5xl font-extrabold text-gray-100 leading-relaxed  bg-clip-text mt-6 mb-3 md:mb-8 md:-mx-4">
+                  Mint SoccerGoldNFT
                 </p>
 
                 <div className="w-full px-4">
-                  <div className="relative rounded-md pb-0 p-2 shadow-md">
-                    <video autoPlay loop muted poster='/images/squidsqui100.gif' className='w-[400px] vid hidden md:block'>
-                      <source src='/images/squidsqui100.gif' />
-                    </video>
-                    <img src='/images/squidsqui100.gif' alt='squidsqui gif' className='w-[400px] md:hidden flex items-center justify-center' />
+                  <div className="relative rounded-md pb-0 p-4 mb-4">
+
+                    <img src='/images/soccergoldfloater.png' alt='floater' className='floating w-[400px] flex items-center justify-center' />
                   </div>
                 </div>
               </div>
@@ -274,15 +223,15 @@ export default function Home() {
 
               <div className='flex flex-col items-center justify-center text-black pt:0 -mt-6 md:mt-2 md:pb-2'>
                 <div className='flex flex-col items-center justify-center text-black'>
-                  <p className='text-bluee pt-0 p-2'>{totalMinted}/7592 left till sell out</p>
-                  <ProgressBar bgcolor="#63c6f7" progress={(((totalMinted) / 7592) * 100).toFixed(2)} height={30} style="font-family: Montserrat san-serif" />
+                  <p className='text-greenn pt-0 p-2'>{totalMinted}/7592 left till sell out</p>
+                  <ProgressBar bgcolor="#3AAA35" progress={(((totalMinted) / 7592) * 100).toFixed(2)} height={30} style="font-family: Montserrat san-serif" />
 
 
                 </div>
                 <div className="flex items-center max-w-md mt-2"></div>
-                <div className='mb-4 bg-pattern flex items-center justify-between rounded-md w-11/12 mx-auto p-2 border-2 border-bluee transition ease-in-out duration-500'>
-                  <p className='font-bold text-bluee'>Price Per Mint:</p>
-                  <p className='font-bold text-bluee'>{price} ETH</p>
+                <div className='mb-4 bg-pattern flex items-center justify-between rounded-md w-11/12 mx-auto p-2 border-2 border-greenn transition ease-in-out duration-500'>
+                  <p className='font-bold text-greenn'>Price Per Mint:</p>
+                  <p className='font-bold text-greenn'>{price} ETH</p>
                 </div>
 
               </div>
@@ -291,28 +240,28 @@ export default function Home() {
               {walletAddress.length > 0 ? (
                 <div className='flex flex-col'>
                   <div className='flex items-center justify-between px-16 sm:px-24 m-4'>
-                    <button className='button w-10 h-10 flex items-center justify-center text-bluee hover:shadow-lg bg-background font-bold rounded-md border border-opacity-80 border-cyan-600'
+                    <button className='button w-10 h-10 flex items-center justify-center text-greenn hover:shadow-lg bg-background font-bold rounded-md border border-opacity-80 border-cyan-600'
                       onClick={decrementCount}
                     >
                       ــ
                     </button>
-                    <p className="flex items-center justify-center flex-1 grow text-center font-bold text-bluee text-2xl md:text-3xl">
+                    <p className="flex items-center justify-center flex-1 grow text-center font-bold text-greenn text-2xl md:text-3xl">
                       {count}
                       {/* 1 */}
                     </p>
-                    <button className="button w-10 h-10 flex items-center justify-center text-bluee text-2xl hover:shadow-lg bg-background font-bold rounded-md border border-opacity-80 border-cyan-600"
+                    <button className="button w-10 h-10 flex items-center justify-center text-greenn text-2xl hover:shadow-lg bg-background font-bold rounded-md border border-opacity-80 border-cyan-600"
                       onClick={incrementCount}
                     >
                       +
                     </button>
                   </div>
-                  <div className='flex items-center justify-center p-2 text-bluee'>
+                  <div className='flex items-center justify-center p-2 text-greenn'>
                     Total: {Number.parseFloat(price * count)} ETH +
                     <span className='text-gray-700'> Gas</span>
                   </div>
                   <div className='flex items-center justify-center'>
                     <button
-                      className='text-lg font-semibold uppercase font-base text-gray-100 px-12 py-2 tracking-wide bg-gradient-to-tl from-greenn hover:from-cyan-200 hover:to-cyan-500 to-bluee rounded-md hover:shadow-green-500/20'
+                      className='text-lg font-semibold uppercase font-base text-gray-100 px-12 py-2 tracking-wide bg-gradient-to-tl from-greenn hover:from-cyan-200 hover:to-cyan-500 to-greenn rounded-md hover:shadow-green-500/20'
                       // onClick={mintPass}
                       onClick={onMintPressed}
                     >
@@ -348,6 +297,9 @@ export default function Home() {
       </section>
 
       {/* Content + footer Section */}
+
+      <Footer />
+
 
     </>
   )

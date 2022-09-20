@@ -11,9 +11,15 @@
   
 }
 
+@font-face {
+  font-family: "Kanit";
+  src: url("../public/fonts/Kanit.woff2");
+  
+}
+
 
 :root{
-  --font-family: 'Montserrat_Special', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-family: 'Kanit', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --clr-light: #f7ede2;
   --clr-lightt: #f0e9e9;
   --clr-purple: #9b5de5;
@@ -50,8 +56,7 @@ html {
 }
 
 .bg-pattern {
-  background-color: #ffffff;
-  background-image: url("/images/purpleeth.webp");
+  background-color: #00132F;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -78,4 +83,18 @@ html {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.floating { 
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  
+}
+
+@keyframes floating {
+  0% { transform: translate(0,  0px); }
+  50%  { transform: translate(0, 15px); }
+  100%   { transform: translate(0, -0px); }   
 }

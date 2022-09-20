@@ -208,7 +208,7 @@ export default function Home() {
 
     if (time === 1) {
 
-      setRate(1)
+      setRate(115)
       end = start + 604800 * 1000
       setEndDate(String(new Date(end).toUTCString()));
 
@@ -217,17 +217,17 @@ export default function Home() {
 
       end = start + 2629743 * 1000
       setEndDate(String(new Date(end).toUTCString()));
-      setRate(2)
+      setRate(155)
     } else if (time === 3) {
 
       end = start + 5259486 * 1000
       setEndDate(String(new Date(end).toUTCString()));
-      setRate(3)
+      setRate(215)
     } else {
 
       end = start + 7889229 * 1000
       setEndDate(String(new Date(end).toUTCString()));
-      setRate(4)
+      setRate(295)
     }
   }
 
@@ -343,13 +343,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ETHSTAKE</title>
-        <meta name="description" content="ETHSTAKE Dapp" />
+        <title>SoccerGold Stake</title>
+        <meta name="description" content="Soccer Gold Stake Dapp" />
         <link rel="icon" href="/favicon.png" />
       </Head>
 
       {/* Header */}
-      <header className='fixed w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 transition-colors duration-500 z-40 flex-none md:z-50 bg-header'>
+      <header className='w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 transition-colors duration-500 z-40 border-b border-1 border-gray-400 border-opacity-40 flex-none md:z-50 bg-pattern'>
 
         {/* Header Container */}
         <div className='flex h-full items-center justify-center max-w-11xl mx-auto border-opacity-0'>
@@ -360,7 +360,8 @@ export default function Home() {
             <div className='flex'>
               <Link className='w-min-content' href='/' passHref>
                 <a className='flex'>
-                  <img alt='' src='/images/bull_logo.png' className='h-[80px]' />
+                  <img alt='' src='/images/logo-text.png' className='hidden md:flex h-[40px]' />
+                  <img alt='' src='/images/soccergoldlogo.png' className='md:hidden h-[40px]' />
 
                 </a>
               </Link>
@@ -371,69 +372,12 @@ export default function Home() {
 
           <nav>
 
-            <section className="MOBILE-MENU flex lg:hidden">
-              <div
-                className="HAMBURGER-ICON space-y-2"
-                onClick={() => setIsNavOpen((prev) => !prev)}
-              >
-                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
-                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
-                <span className="block h-0.5 w-12 animate-pulse bg-brightyellow"></span>
-              </div>
-
-              <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
-                <div
-                  className="absolute top-0 right-0 px-8 py-8"
-                  onClick={() => setIsNavOpen(false)}
-                >
-                  <svg
-                    className="h-8 w-8 text-gray-600"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </div>
-                <div className=''>
-                  <ul className="flex flex-col items-center justify-between min-h-[250px]">
-
-                    <li className="border-b text-white border-gray-400 my-2 uppercase">
-                      <a href="/stake">Stake</a>
-                    </li>
-                    <li>
-                      {walletAddress.length > 0 ? (
-
-                        <div className='px-4 bg-opacity-20 text-white items-center relative h-9 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
-                        >
-                          {String(walletAddress).substring(0, 6)}
-                          {"....."}
-                          {String(walletAddress).substring(39)}
-                        </div>
-                      ) : (
-
-                        <button className='px-4 bg-titanium bg-opacity-100 text-gray-100 items-center relative h-9 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
-
-                          onClick={connectWalletPressed}
-                        >Connect
-                        </button>
-                      )}
-                    </li>
 
 
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            <ul className="DESKTOP-MENU hidden space-x-2 lg:flex">
+            <ul className="DESKTOP-MENU space-x-2 flex flex-row">
 
               <li>
-                <a href="/stake" className='hidden sm:flex bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-9 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
+                <a href="/stake" className='flex-none bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-12 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
                   <p className='rounded uppercase text-lg font-black
           text-white md:flex'>Stake</p>
                 </a>
@@ -443,7 +387,7 @@ export default function Home() {
               <li>
                 {walletAddress.length > 0 ? (
 
-                  <div className='px-4 bg-opacity-20 text-white items-center relative h-9 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
+                  <div className='px-4 bg-opacity-20 text-white items-center relative h-12 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
                   >
                     {String(walletAddress).substring(0, 6)}
                     {"....."}
@@ -451,10 +395,10 @@ export default function Home() {
                   </div>
                 ) : (
 
-                  <button className='px-4 bg-titanium bg-opacity-100 text-gray-100 items-center relative h-9 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
+                  <button className='px-4 bg-greenn bg-opacity-100 text-gray-100 items-center relative h-12 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
 
                     onClick={connectWalletPressed}
-                  >Connect
+                  >Connect Wallet
                   </button>
                 )}
               </li>
@@ -472,7 +416,7 @@ export default function Home() {
         height: 100vh;
         top: 0;
         left: 0;
-        background: #210234;
+        background: #fff;
         z-index: 10;
         display: flex;
         flex-direction: column;
@@ -496,7 +440,7 @@ export default function Home() {
 
 
 
-        <div className="flex flex-col items-center justify-center md:flex-row md:items-center md:justify-between text-slate-900">
+        <div className="flex flex-row items-center mx-10 justify-center md:flex-row md:items-center md:justify-between text-slate-900">
 
 
 
@@ -510,7 +454,7 @@ export default function Home() {
 
             <div className="w-full mt-12 px-4 items-center justify-center">
 
-              <div className="max-w-[600px] px-6 mt-5 py-5 rounded-lg bg-gray-300 shadow-inner border-4 border-orange-400 items-center justify-center">
+              <div className="max-w-[600px] px-6 mt-5 py-5 rounded-lg bg-gray-300 shadow-inner border-4 border-greenn items-center justify-center">
 
                 <p className="text-center text-2xl text-black py-6">Pools</p>
                 <div className="flex flex-row justify-between">
@@ -526,21 +470,24 @@ export default function Home() {
 
 
                 {isStaked ? (
+                  <>
 
-                  <div className='justify-center p-4 items-center mt-5 text-gray-100 text-sm bg-red-500 rounded-md border-4 border-gray-100'>
+                    <div className='justify-center p-4 items-center mt-5 text-gray-100 text-sm bg-red-500 rounded-md border-4 border-gray-100'>
 
-                    <p>You have already staked. Your start date was {startDate} and your end date is {endDate}.</p>
+                      <p>You have already staked. Your start date was {startDate} and your end date is {endDate}.</p>
 
-                  </div>
+                    </div>
 
+                    <p className="flex flex-row w-full text-black items-center text-lg py-2 my-2">Calculated Reward: <span className='w-3/5 text-lime text-black text-lg text-center rounded h-9 px-2 py-2 my-2'>{parseInt(reward).toFixed(0)}</span></p>
 
+                  </>
 
                 ) : (
                   <>
 
                     <p className="flex flex-row w-full text-black text-lg py-2 my-2">Stake Date: <span className='w-4/5 text-lime text-center text-black text-lg rounded  h-9 px-2 py-2 my-2 '>{startDate}</span></p>
                     <p className="flex flex-row w-full text-black text-lg py-2 my-2">Unlock Date: <span className='w-4/5 text-lime text-center text-black text-lg rounded  h-9 px-2 py-2 my-2'>{endDate}</span></p>
-                    <p className="flex flex-row w-full text-black text-lg py-2 my-2">Interest Rate: <span className='w-4/5 text-lime text-black text-lg text-center rounded  h-9 px-2 py-2 my-2'>{rate}</span></p>
+                    <p className="flex flex-row w-full text-black text-lg py-2 my-2">Interest Rate: <span className='w-4/5 text-lime text-black text-lg text-center rounded  h-9 px-2 py-2 my-2'>{rate}% APY</span></p>
 
 
                   </>
@@ -548,7 +495,7 @@ export default function Home() {
 
                 )}
 
-                <p className="flex flex-row w-full text-black items-center text-lg py-2 my-2">Calculated Reward: <span className='w-3/5 text-lime text-black text-lg text-center rounded h-9 px-2 py-2 my-2'>{parseInt(reward).toFixed(0)}</span></p>
+
 
 
 
@@ -563,13 +510,13 @@ export default function Home() {
                         <form className="flex flex-row text-center bg-gray-100 rounded-lg" onSubmit={onStakePressed}>
 
                           <input className="flex flex-col text-center bg-gray-100 rounded-lg mx-1 text-xs text-lime px-8 w-full" id='stakeId' type="number" name="stakeId" placeholder="id" value={maxAmount} />
-                          <button className='flex flex-col justify-center text-xs md:text-lg bg-red-500 shadow-2xl rounded-lg font-semibold uppercase font-base text-gray-100 px-2 py-2 tracking-wide hover:shadow-green-500/20'
+                          <button className='flex flex-col justify-center text-xs md:text-lg bg-transparent shadow-2xl rounded-lg font-semibold uppercase font-base text-black px-2 py-2 tracking-wide hover:shadow-green-500/20'
                             onClick={setMaxAmount}>
                             MAX
                           </button>
 
                           <button
-                            className='w-full text-center text-xs md:text-lg bg-green-400 rounded-lg shadow-2xl font-semibold uppercase font-base text-gray-100 px-10 py-2 tracking-wide hover:shadow-green-500/20'
+                            className='w-full text-center text-xs md:text-lg bg-greenn rounded-lg shadow-2xl font-semibold uppercase font-base text-gray-100 px-10 py-2 tracking-wide hover:shadow-green-500/20'
                           // onClick={mintPass}
 
                           >
@@ -580,7 +527,7 @@ export default function Home() {
                       <div className='flex items-center justify-center w-full'>
 
                         <button
-                          className='w-full text-xs md:text-lg bg-orange-500 rounded font-semibold uppercase shadow-2xl font-base text-gray-100 px-12 py-2 mx-2 tracking-wide hover:shadow-green-500/20'
+                          className='w-full text-xs md:text-lg bg-gray-100 rounded font-semibold uppercase shadow-2xl font-base text-black px-12 py-2 mx-2 tracking-wide hover:shadow-green-500/20'
                           onClick={onUnstakePressed}
 
                         >
@@ -595,7 +542,7 @@ export default function Home() {
                     <div className='flex flex-row h-12 mt-2 mb-4 '>
 
                       <button
-                        className='text-xs w-full bg-purple-500 shadow-2xl rounded font-semibold uppercase font-base text-white px-1 py-2 mx-2 tracking-wide hover:shadow-green-500/20'
+                        className='text-sm w-full bg-darkblue shadow-2xl rounded font-semibold uppercase font-base text-gray-100 px-1 py-2 mx-2 tracking-wide hover:shadow-green-500/20'
                         onClick={calculateReward}
 
                       >
@@ -653,7 +600,10 @@ export default function Home() {
         {status}
       </div>
     )} */}
+        <div className='flex flex-row'>
+          <img src='/images/soccergoldlogo.png' className='floating hidden md:flex' />
 
+        </div>
 
 
         {/* Right Hero Section - Video/Image Bird PASS */}
@@ -666,11 +616,13 @@ export default function Home() {
 
 
 
+
       {/* <Footer />*/}
 
 
 
       {/* Content + footer Section */}
+      <Footer />
 
     </>
   )
