@@ -138,6 +138,14 @@ export default function Home() {
             <ul className="DESKTOP-MENU space-x-2 flex flex-row">
 
               <li>
+                <a href="/" className='flex-none bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-12 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
+                  <p className='rounded uppercase text-lg font-black
+          text-white md:flex'>Mint</p>
+                </a>
+              </li>
+
+
+              <li>
                 <a href="/stake" className='flex-none bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-12 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
                   <p className='rounded uppercase text-lg font-black
           text-white md:flex'>Stake</p>

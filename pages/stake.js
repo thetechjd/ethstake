@@ -137,25 +137,25 @@ export default function Home() {
 
       if (tier === 2) {
 
-        end = (stakeDate * 1000) + 2629743 * 1000
+        end = (stakeDate * 1000) + 5259486 * 1000
         setEndDate(String(new Date(end).toUTCString()));
 
 
       } else if (tier === 3) {
 
-        end = (stakeDate * 1000) + 5259486 * 1000
+        end = (stakeDate * 1000) + 7889229 * 1000
         setEndDate(String(new Date(end).toUTCString()));
 
 
       } else if (tier === 4) {
 
-        end = (stakeDate * 1000) + 7889229 * 1000
+        end = (stakeDate * 1000) + 15778458 * 1000
         setEndDate(String(new Date(end).toUTCString()));
 
 
       } else {
 
-        end = (stakeDate * 1000) + 604800 * 1000
+        end = (stakeDate * 1000) + 2629743 * 1000
         setEndDate(String(new Date(end).toUTCString()));
 
 
@@ -163,6 +163,7 @@ export default function Home() {
       }
 
     } catch (error) {
+      setBalance(0);
       console.log("Nothing is staked");
     }
 
@@ -209,23 +210,23 @@ export default function Home() {
     if (time === 1) {
 
       setRate(115)
-      end = start + 604800 * 1000
+      end = start + 2629743 * 1000
       setEndDate(String(new Date(end).toUTCString()));
 
 
     } else if (time === 2) {
 
-      end = start + 2629743 * 1000
+      end = start + 5259486 * 1000
       setEndDate(String(new Date(end).toUTCString()));
       setRate(155)
     } else if (time === 3) {
 
-      end = start + 5259486 * 1000
+      end = start + 7889229 * 1000
       setEndDate(String(new Date(end).toUTCString()));
       setRate(215)
     } else {
 
-      end = start + 7889229 * 1000
+      end = start + 15778458 * 1000
       setEndDate(String(new Date(end).toUTCString()));
       setRate(295)
     }
@@ -253,9 +254,7 @@ export default function Home() {
 
   const onUnstakePressed = async (e) => {
     e.preventDefault();
-    let tokenId = document.getElementById('unstakeId').value;
-    let testPrice = (ethPrice * .0001).toFixed(0);
-    await stakeContract.methods.unstake(tokenId, testPrice).send({ from: walletAddress });
+    await stakeContract.methods.unstake().send({ from: walletAddress });
 
   };
 
@@ -316,18 +315,36 @@ export default function Home() {
     e.preventDefault();
 
     const stakeDate = await stakeContract.methods.getStartDate(walletAddress).call();
+
     const checkTime = Date.now()
 
 
     const timeElapsed = (checkTime - (stakeDate * 1000)) / 1000;
     if (lockTime === 2) {
-      setReward(timeElapsed * 2)
+      if (timeElapsed >= 5259486) {
+        setReward(5259486 * 0.000004915)
+      } else {
+        setReward(timeElapsed * 0.000004915);
+      }
     } else if (lockTime === 3) {
-      setReward(timeElapsed * 3)
+      if (timeElapsed >= 7889229) {
+        setReward(7889229 * 0.000006818);
+      } else {
+        setReward(timeElapsed * 0.000006818);
+      }
     } else if (timeElapsed === 4) {
-      setReward(timeElapsed * 4)
+      if (timeElapsed >= 15778458) {
+        setReward(15778458 * 0.0000093544)
+      } else {
+        setReward(timeElapsed * 0.0000093544)
+      }
+
     } else {
-      setReward(timeElapsed)
+      if (timeElapsed >= 2629743) {
+        setReward(2629743 * 0.00000365)
+      } else {
+        setReward(timeElapsed * 0.00000365)
+      }
     }
 
 
@@ -375,6 +392,13 @@ export default function Home() {
 
 
             <ul className="DESKTOP-MENU space-x-2 flex flex-row">
+
+              <li>
+                <a href="/" className='flex-none bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-12 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
+                  <p className='rounded uppercase text-lg font-black
+          text-white md:flex'>Mint</p>
+                </a>
+              </li>
 
               <li>
                 <a href="/stake" className='flex-none bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-12 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
@@ -454,19 +478,19 @@ export default function Home() {
 
             <div className="w-full mt-12 px-4 items-center justify-center">
 
-              <div className="max-w-[600px] px-6 mt-5 py-5 rounded-lg bg-gray-300 shadow-inner border-4 border-greenn items-center justify-center">
+              <div className="max-w-[600px] px-6 mt-5 py-5 rounded-lg bg-greenn shadow-inner border-4 border-greenn items-center justify-center">
 
-                <p className="text-center text-2xl text-black py-6">Pools</p>
+                <p className="text-center text-2xl text-gray-100 py-6">Pools</p>
                 <div className="flex flex-row justify-between">
 
-                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-white px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setFirstLockTime}>7 days</button>
-                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-white px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setSecondLockTime}>30 days</button>
-                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-white px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setThirdLockTime}>60 days</button>
-                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-white px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setFourthLockTime}>90 days</button>
+                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-black px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setFirstLockTime}>30 days</button>
+                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-black px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setSecondLockTime}>60 days</button>
+                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-black px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setThirdLockTime}>90 days</button>
+                  <button className='px-2 rounded-lg flex flex-row justify-center text-xs md:text-lg bg-gray-100 font-semibold uppercase font-base text-black px-2 py-2 mx-2 tracking-wide hover:shadow-green-500/20' onClick={setFourthLockTime}>180 days</button>
 
                 </div>
-                <p className="flex flex-row w-full mt-5 justify-start items-center text-black h-9 text-lg py-4 my-2">Total Balance: <span className='w-3/5 text-lime text-center text-black text-lg rounded  h-9 px-2 py-2 my-2 '>{balance}</span></p>
-                <p className="flex flex-row w-full text-black items-center text-lg py-4 my-2">Stake Amount: <span className='w-3/5 text-lime text-center text-black text-lg rounded h-9 px-2 py-2 my-2'>{totalStaked}</span></p>
+                <p className="flex flex-row w-full mt-5 justify-start items-center text-gray-100 h-9 text-lg py-4 my-2">Total Balance: <span className='w-3/5 text-gray-100 text-center text-gray-100 text-lg rounded  h-9 px-2 py-2 my-2 '>{balance} SGOLD</span></p>
+                <p className="flex flex-row w-full text-gray-100 items-center text-lg py-4 my-2">Stake Amount: <span className='w-3/5 text-center text-gray-100 text-lg rounded h-9 px-2 py-2 my-2'>{totalStaked} SGOLD</span></p>
 
 
                 {isStaked ? (
@@ -478,16 +502,16 @@ export default function Home() {
 
                     </div>
 
-                    <p className="flex flex-row w-full text-black items-center text-lg py-2 my-2">Calculated Reward: <span className='w-3/5 text-lime text-black text-lg text-center rounded h-9 px-2 py-2 my-2'>{parseInt(reward).toFixed(0)}</span></p>
+                    <p className="flex flex-row w-full text-gray-100 items-center text-lg py-2 my-2">Calculated Reward: <span className='w-3/5 text-lime text-black text-lg text-center rounded h-9 px-2 py-2 my-2'>{parseInt(reward).toFixed(0)} SGOLD</span></p>
 
                   </>
 
                 ) : (
                   <>
 
-                    <p className="flex flex-row w-full text-black text-lg py-2 my-2">Stake Date: <span className='w-4/5 text-lime text-center text-black text-lg rounded  h-9 px-2 py-2 my-2 '>{startDate}</span></p>
-                    <p className="flex flex-row w-full text-black text-lg py-2 my-2">Unlock Date: <span className='w-4/5 text-lime text-center text-black text-lg rounded  h-9 px-2 py-2 my-2'>{endDate}</span></p>
-                    <p className="flex flex-row w-full text-black text-lg py-2 my-2">Interest Rate: <span className='w-4/5 text-lime text-black text-lg text-center rounded  h-9 px-2 py-2 my-2'>{rate}% APY</span></p>
+                    <p className="flex flex-row w-full text-gray-100 text-lg py-2 my-2">Stake Date: <span className='w-4/5 text-center text-gray-100 text-lg rounded  h-9 px-2 py-2 my-2 '>{startDate}</span></p>
+                    <p className="flex flex-row w-full text-gray-100 text-lg py-2 my-2">Unlock Date: <span className='w-4/5 text-center text-gray-100 text-lg rounded  h-9 px-2 py-2 my-2'>{endDate}</span></p>
+                    <p className="flex flex-row w-full text-gray-100 text-lg py-2 my-2">Interest Rate: <span className='w-4/5 text-gray-100 text-lg text-center rounded  h-9 px-2 py-2 my-2'>{rate}% APY</span></p>
 
 
                   </>
@@ -516,7 +540,7 @@ export default function Home() {
                           </button>
 
                           <button
-                            className='w-full text-center text-xs md:text-lg bg-greenn rounded-lg shadow-2xl font-semibold uppercase font-base text-gray-100 px-10 py-2 tracking-wide hover:shadow-green-500/20'
+                            className='w-full text-center text-xs md:text-lg bg-darkblue rounded-lg shadow-2xl font-semibold uppercase font-base text-gray-100 px-10 py-2 tracking-wide hover:shadow-green-500/20'
                           // onClick={mintPass}
 
                           >
@@ -555,7 +579,7 @@ export default function Home() {
                   </>
                 ) : (
                   <>
-                    <p className='text-center flex flex-col font-bold text-white text-base md:text-2xl text-body-color leading-relaxed m-3 md:m-8 break-words ...'>
+                    <p className='text-center flex flex-col font-bold text-gray-100 text-base md:text-2xl text-body-color leading-relaxed m-3 md:m-8 break-words ...'>
                       Connect Your Wallet to Stake
                     </p></>
                 )}
