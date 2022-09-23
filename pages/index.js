@@ -8,7 +8,7 @@ import ProgressBar from '../components/ProgressBar';
 import { useStatus } from "../context/statusContext";
 import { connectWallet, getCurrentWalletConnected, getNFTPrice, getTotalMinted } from "../utils/interact.js";
 const contractABI = require("../pages/contract-abi.json");
-const contractAddress = "0x3285BD0ae75236f04efF506c40a2299a3E352B14";
+const contractAddress = "0xF162eD18756953aa72dA0Ac456488875b90763b2";
 const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
 
 
@@ -231,15 +231,15 @@ export default function Home() {
 
               <div className='flex flex-col items-center justify-center text-black pt:0 -mt-6 md:mt-2 md:pb-2'>
                 <div className='flex flex-col items-center justify-center text-black'>
-                  <p className='text-greenn pt-0 p-2'>{totalMinted}/7592 left till sell out</p>
-                  <ProgressBar bgcolor="#3AAA35" progress={(((totalMinted) / 7592) * 100).toFixed(2)} height={30} style="font-family: Montserrat san-serif" />
+                  <p className='text-greenn pt-0 p-2'>{totalMinted}/4992 left till sell out</p>
+                  <ProgressBar bgcolor="#3AAA35" progress={(((totalMinted) / 4992) * 100).toFixed(2)} height={30} style="font-family: Montserrat san-serif" />
 
 
                 </div>
                 <div className="flex items-center max-w-md mt-2"></div>
                 <div className='mb-4 bg-pattern flex items-center justify-between rounded-md w-11/12 mx-auto p-2 border-2 border-greenn transition ease-in-out duration-500'>
                   <p className='font-bold text-greenn'>Price Per Mint:</p>
-                  <p className='font-bold text-greenn'>{price} ETH</p>
+                  <p className='font-bold text-greenn'>{totalMinted > 100 ? price : 0} ETH</p>
                 </div>
 
               </div>
@@ -264,7 +264,7 @@ export default function Home() {
                     </button>
                   </div>
                   <div className='flex items-center justify-center p-2 text-greenn'>
-                    Total: {Number.parseFloat(price * count)} ETH +
+                    Total: {totalMinted > 100 ? Number.parseFloat(price * count) : 0} ETH +
                     <span className='text-gray-700'> Gas</span>
                   </div>
                   <div className='flex items-center justify-center'>

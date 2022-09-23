@@ -315,35 +315,37 @@ export default function Home() {
     e.preventDefault();
 
     const stakeDate = await stakeContract.methods.getStartDate(walletAddress).call();
+    const stakeAmount = await stakeContract.methods.getAmount(walletAddress).call();
 
     const checkTime = Date.now()
 
 
     const timeElapsed = (checkTime - (stakeDate * 1000)) / 1000;
+    console.log(timeElapsed);
     if (lockTime === 2) {
       if (timeElapsed >= 5259486) {
-        setReward(5259486 * 0.000004915)
+        setReward(stakeAmount * 5259486 * 1.55 / 31536000)
       } else {
-        setReward(timeElapsed * 0.000004915);
+        setReward(stakeAmount * timeElapsed * 1.55 / 31536000);
       }
     } else if (lockTime === 3) {
       if (timeElapsed >= 7889229) {
-        setReward(7889229 * 0.000006818);
+        setReward(stakeAmount * 7889229 * 2.55 / 31536000);
       } else {
-        setReward(timeElapsed * 0.000006818);
+        setReward(stakeAmount * timeElapsed * 2.55 / 31536000);
       }
     } else if (timeElapsed === 4) {
       if (timeElapsed >= 15778458) {
-        setReward(15778458 * 0.0000093544)
+        setReward(stakeAmount * 15778458 * 2.95 / 31536000)
       } else {
-        setReward(timeElapsed * 0.0000093544)
+        setReward(stakeAmount * timeElapsed * 2.95 / 31536000)
       }
 
     } else {
       if (timeElapsed >= 2629743) {
-        setReward(2629743 * 0.00000365)
+        setReward(stakeAmount * 2629743 * 1.15 / 31536000)
       } else {
-        setReward(timeElapsed * 0.00000365)
+        setReward(stakeAmount * timeElapsed * 1.15 / 31536000)
       }
     }
 
@@ -502,7 +504,7 @@ export default function Home() {
 
                     </div>
 
-                    <p className="flex flex-row w-full text-gray-100 items-center text-lg py-2 my-2">Calculated Reward: <span className='w-3/5 text-lime text-black text-lg text-center rounded h-9 px-2 py-2 my-2'>{parseInt(reward).toFixed(0)} SGOLD</span></p>
+                    <p className="flex flex-row w-full text-gray-100 items-center text-lg py-2 my-2">Calculated Reward: <span className='w-3/5 text-gray-100 text-lg text-center rounded h-9 px-2 py-2 my-2'>{parseInt(reward / 10 ** 18).toFixed(0)} SGOLD</span></p>
 
                   </>
 

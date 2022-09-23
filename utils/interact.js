@@ -1,7 +1,7 @@
 require('dotenv').config();
 import { createAlchemyWeb3 } from "@alch/alchemy-web3";
 const contractABI = require("../pages/contract-abi.json");
-const contractAddress = "0x3285BD0ae75236f04efF506c40a2299a3E352B14";
+const contractAddress = "0xF162eD18756953aa72dA0Ac456488875b90763b2";
 
 
 const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
