@@ -12,8 +12,8 @@ import { connectWallet, getCurrentWalletConnected, getTotalMinted, getBalance } 
 
 const contractABI = require("./contract-abi.json");
 const stakeABI = require("./stake-abi.json");
-const contractAddress = "0x20Fa2b32DE5Dd885adDC606F0c08b1d0E6913Bd4";
-const stakeAddress = "0x68F4F9854F23a7F94E25e9acdF1Afc15444Db39d";
+const contractAddress = "0xF162eD18756953aa72dA0Ac456488875b90763b2";
+const stakeAddress = "0x0285e08bc8e2B14f59e9e05ED05A199caDE4d74C";
 const apikey = "8XX3TRP1WSAQDAJD24KCGE56NJJADYD2P3";
 const endpoint = "https://api-goerli.etherscan.io/api";
 
