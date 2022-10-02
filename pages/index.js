@@ -8,10 +8,17 @@ import ProgressBar from '../components/ProgressBar';
 import { useStatus } from "../context/statusContext";
 import { connectWallet, getCurrentWalletConnected, getNFTPrice, getTotalMinted } from "../utils/interact.js";
 const contractABI = require("../pages/contract-abi.json");
+const busdABI = require("../pages/busd-abi.json");
 const contractAddress = "0xF162eD18756953aa72dA0Ac456488875b90763b2";
+const busdAddress = "0x4Fabb145d64652a948d72533023f6E7A623C7C53";
 const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
 
 
+
+const busdContract = new web3.eth.Contract(
+  busdABI,
+  busdAddress
+);
 
 const nftContract = new web3.eth.Contract(
   contractABI,
@@ -74,10 +81,19 @@ export default function Home() {
 
   const onMintPressed = async (e) => {
     e.preventDefault();
-    let total = web3.utils.toWei(price, 'ether') * count;
-    await nftContract.methods.mint(count).send({ from: walletAddress, value: total, gas: 500000 })
 
-  };
+    let total = web3.utils.toWei(price, 'ether') * count;
+
+    await busdContract.methods.approve(contractAddress, total).send({ from: walletAddress }).then(() => {
+      nftContract.methods.mint(count).send({ from: walletAddress, gas: 300000 })
+    })
+  }
+
+
+
+  // await nftContract.methods.mint(count).send({ from: walletAddress, value: total, gas: 500000 })
+
+  //};
 
   const incrementCount = () => {
     if (count < 10) {
