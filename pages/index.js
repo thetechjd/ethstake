@@ -9,7 +9,7 @@ import { useStatus } from "../context/statusContext";
 import { connectWallet, getCurrentWalletConnected, getNFTPrice, getTotalMinted } from "../utils/interact.js";
 const contractABI = require("../pages/contract-abi.json");
 const busdABI = require("../pages/busd-abi.json");
-const contractAddress = "0xF162eD18756953aa72dA0Ac456488875b90763b2";
+const contractAddress = "0x5e93352f55d69BF84251008ADF1eD55f4f6Ca0dE";
 const busdAddress = "0x4Fabb145d64652a948d72533023f6E7A623C7C53";
 const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
 
@@ -255,7 +255,7 @@ export default function Home() {
                 <div className="flex items-center max-w-md mt-2"></div>
                 <div className='mb-4 bg-pattern flex items-center justify-between rounded-md w-11/12 mx-auto p-2 border-2 border-greenn transition ease-in-out duration-500'>
                   <p className='font-bold text-greenn'>Price Per Mint:</p>
-                  <p className='font-bold text-greenn'>{totalMinted > 100 ? price : 0} ETH</p>
+                  <p className='font-bold text-greenn'>{totalMinted > 100 ? price : 0} BUSD</p>
                 </div>
 
               </div>
