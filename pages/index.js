@@ -119,13 +119,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>SoccerGoldNFT</title>
-        <meta name="description" content="Soccer Gold NFT Dapp" />
+        <title>WealthSeaNFT</title>
+        <meta name="description" content="WealthSea NFT Dapp" />
         <link rel="icon" href="/images/favicon.png" />
       </Head>
 
       {/* Header */}
-      <header className='w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 transition-colors duration-500 z-40 border-b border-1 border-gray-400 border-opacity-40 flex-none md:z-50 bg-pattern'>
+      <header className='w-full top-0 md:px-8 px-5 pt-5 pb-3 z-70 transition-colors duration-500 z-40 border-opacity-40 flex-none md:z-50 bg-pattern'>
 
         {/* Header Container */}
         <div className='flex h-full items-center justify-center max-w-11xl mx-auto border-opacity-0'>
@@ -136,8 +136,8 @@ export default function Home() {
             <div className='flex'>
               <Link className='w-min-content' href='/' passHref>
                 <a className='flex'>
-                  <img alt='' src='/images/logo-text.png' className='hidden md:flex h-[40px]' />
-                  <img alt='' src='/images/soccergoldlogo.png' className='md:hidden h-[40px]' />
+
+                  <img alt='' src='/images/wealthsea.png' className='h-[240px]' />
 
 
                 </a>
@@ -153,6 +153,7 @@ export default function Home() {
 
             <ul className="DESKTOP-MENU space-x-2 flex flex-row">
 
+              {/*
               <li>
                 <a href="/" className='flex-none bg-opacity-0 text-gray-100 opacity-80 items-center  relative h-12 tracking-wider pt-0.5 first::pt-0 uppercase font-500 padding-huge bg-blue-300 duration-200 px-3 hover:bg-opacity-90 flex justify-center flex-row cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110'>
                   <p className='rounded uppercase text-lg font-black
@@ -166,13 +167,13 @@ export default function Home() {
                   <p className='rounded uppercase text-lg font-black
           text-white md:flex'>Stake</p>
                 </a>
-              </li>
+  </li>*/}
 
               {/* CONNECT WALLET */}
               <li>
                 {walletAddress.length > 0 ? (
 
-                  <div className='px-4 bg-opacity-20 text-white items-center relative h-12 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
+                  <div className='px-4 bg-opacity-20 text-darkblue items-center relative h-12 tracking-wider sm:pt-0.5 md:pt-2 lg:pt-0.5 first::pt-0 duration-500 text-6xs md:text-base padding-huge opacity-100 hover:bg-opacity-70 rounded flex justify-center flex-row border border-gray-900 hover:shadow-green-500/20 cursor-pointer'
                   >
                     {String(walletAddress).substring(0, 6)}
                     {"....."}
@@ -228,14 +229,14 @@ export default function Home() {
             {/* Left Hero Section - Mint Info */}
             <div className="w-full px-4">
               <div className="max-w-[570px] mb-12 md:mb-0">
-                <p className="text-2xl text-center md:text-5xl font-extrabold text-gray-100 leading-relaxed  bg-clip-text mt-6 mb-3 md:mb-8">
-                  Mint SoccerGoldNFT
+                <p className="text-2xl text-center md:text-5xl font-extrabold text-darkblue leading-relaxed  bg-clip-text mt-6 mb-3 md:mb-8">
+                  Mint WealthSeaNFT
                 </p>
 
                 <div className="w-full px-4">
                   <div className="relative rounded-md pb-0 p-4 mb-4">
 
-                    <img src='/images/soccergoldfloater.png' alt='floater' className='floating w-[500px] flex items-center justify-center' />
+                    <img src='/images/wealthsea.png' alt='floater' className='floating w-[500px] flex items-center justify-center' />
                   </div>
                 </div>
               </div>
@@ -295,7 +296,7 @@ export default function Home() {
                 </div>
               ) : (
                 <>
-                  <p className='text-center flex flex-col font-bold text-gray-100 text-base md:text-2xl text-body-color leading-relaxed m-3 md:m-8 break-words ...'>
+                  <p className='text-center flex flex-col font-bold text-darkblue text-base md:text-2xl text-body-color leading-relaxed m-3 md:m-8 break-words ...'>
                     Connect Your Wallet To Mint
                   </p></>
               )}

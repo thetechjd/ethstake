@@ -25,7 +25,7 @@ export default function Footer() {
           {/* Discord Icon */}
 
         </ul>
-        <p className='text-center'>© 2022 SoccerGold. All Rights. Reserved.</p>
+        <p className='text-center text-darkblue'>© 2022 WealthSea. All Rights. Reserved.</p>
       </div>
     </footer>
   )
