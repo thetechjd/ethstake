@@ -137,7 +137,7 @@ export default function Home() {
               <Link className='w-min-content' href='/' passHref>
                 <a className='flex'>
 
-                  <img alt='' src='/images/wealthsea.png' className='h-[240px]' />
+                  <img src='/images/wealthsea512.png' className='h-[60px]' />
 
 
                 </a>
