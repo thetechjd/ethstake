@@ -6,15 +6,20 @@
   },
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.2",
+    "@coinbase/wallet-sdk": "^3.5.3",
     "@progress/kendo-date-math": "^1.5.8",
+    "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^0.27.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
     "dotenv": "^16.0.1",
     "next": "latest",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "unix-time": "^1.0.1",
     "unixtime": "^0.0.2",
-    "unixtimejs": "^0.1.1"
+    "unixtimejs": "^0.1.1",
+    "web3modal": "^1.9.9"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

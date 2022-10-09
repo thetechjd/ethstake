@@ -1,6 +1,10 @@
 
 import { createAlchemyWeb3 } from "@alch/alchemy-web3";
+import Web3 from 'web3';
 import { useEffect, useState } from "react";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Link from 'next/link';
 import Head from 'next/head';
 import Footer from '../components/Footer';
@@ -9,27 +13,40 @@ import { useStatus } from "../context/statusContext";
 import { connectWallet, getCurrentWalletConnected, getNFTPrice, getTotalMinted } from "../utils/interact.js";
 const contractABI = require("../pages/contract-abi.json");
 const busdABI = require("../pages/busd-abi.json");
-const contractAddress = "0x5e93352f55d69BF84251008ADF1eD55f4f6Ca0dE";
-const busdAddress = "0x4Fabb145d64652a948d72533023f6E7A623C7C53";
-const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
+const contractAddress = "0xe25cCA93ee7534F3b2e4B6776A06deB21493600E";
+const busdAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+//const web3 = new Web3("https://bsc-dataseed1.binance.org");
+
+//const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
+
+const providerOptions = {
+  walletconnect: {
+    package: WalletConnectProvider, // required
+    options: {
+      rpc: "https://bsc-dataseed1.binance.org" // required
+    }
+  },
+  coinbasewallet: {
+    package: CoinbaseWalletSDK, // Required
+    options: {
+      appName: "WealthSea", // Required
+      rpc: "https://bsc-dataseed1.binance.org", // Optional if `infuraId` is provided; otherwise it's required
+
+      darkMode: true // Optional. Use dark theme, defaults to false
+    }
+  }
+
+};
 
 
 
-const busdContract = new web3.eth.Contract(
-  busdABI,
-  busdAddress
-);
-
-const nftContract = new web3.eth.Contract(
-  contractABI,
-  contractAddress
-);
 
 export default function Home() {
 
   //State variables
   const { status, setStatus } = useStatus();
-  const [walletAddress, setWallet] = useState("");
+  const [provider, setProvider] = useState();
+  const [walletAddress, setAddress] = useState("");
   const [count, setCount] = useState(1);
   const [totalMinted, setTotalMinted] = useState(0);
   const [price, setPrice] = useState(0);
@@ -37,54 +54,90 @@ export default function Home() {
 
 
   useEffect(async () => {
-    const { address, status } = await getCurrentWalletConnected();
-    setWallet(address)
-    setStatus(status);
-    addWalletListener();
+
     setPrice(await getNFTPrice());
     updateTotalSupply();
 
 
 
   }, []);
+  /*
+    function addWalletListener() {
+      if (window.ethereum) {
+        window.ethereum.on("accountsChanged", (accounts) => {
+          if (accounts.length > 0) {
+            setWallet(accounts[0]);
+            console.log(accounts[0]);
+            setStatus("👆🏽 Write a message in the text-field above.");
+          } else {
+            setWallet("");
+            setStatus("🦊 Connect to Metamask using the top right button.");
+          }
+        });
+      } else {
+        setStatus(
+          <p>
+            {" "}
+            🦊{" "}
+            <a target="_blank" href={`https://metamask.io/download.html`}>
+              You must install Metamask, a virtual Ethereum wallet, in your
+              browser.
+            </a>
+          </p>
+        );
+      }
+    }*/
 
-  function addWalletListener() {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", (accounts) => {
-        if (accounts.length > 0) {
-          setWallet(accounts[0]);
-          setStatus("👆🏽 Write a message in the text-field above.");
-        } else {
-          setWallet("");
-          setStatus("🦊 Connect to Metamask using the top right button.");
-        }
+  async function connectWallet() {
+
+    try {
+
+      let web3Modal = new Web3Modal({
+        network: 'mainnet', // optional
+        theme: 'dark',
+        cacheProvider: false,
+
+        providerOptions,
+
       });
-    } else {
-      setStatus(
-        <p>
-          {" "}
-          🦊{" "}
-          <a target="_blank" href={`https://metamask.io/download.html`}>
-            You must install Metamask, a virtual Ethereum wallet, in your
-            browser.
-          </a>
-        </p>
-      );
+      const web3ModalInstance = await web3Modal.connect();
+      const provider = new Web3(web3ModalInstance);
+      if (web3ModalInstance) {
+        setProvider(provider);
+        const accounts = await provider.eth.getAccounts();
+        const address = accounts[0];
+        setAddress(address);
+
+
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
-  const connectWalletPressed = async () => {
-    const walletResponse = await connectWallet();
-    setStatus(walletResponse.status);
-    setWallet(walletResponse.address);
-  };
+  /*
+    const connectWalletPressed = async () => {
+      const walletResponse = await connectWallet();
+      setStatus(walletResponse.status);
+      setWallet(walletResponse.address);
+    };
+    */
 
   const onMintPressed = async (e) => {
     e.preventDefault();
+    const nftContract = new provider.eth.Contract(
+      contractABI,
+      contractAddress
+    )
+    const busdContract = new provider.eth.Contract(
+      busdABI,
+      busdAddress
+    );
 
-    let total = web3.utils.toWei(price, 'ether') * count;
 
-    await busdContract.methods.approve(contractAddress, total).send({ from: walletAddress }).then(() => {
+    let total = provider.utils.toWei(price, 'ether') * count;
+
+    await busdContract.methods.approve(contractAddress, provider.utils.toBN(total)).send({ from: walletAddress }).then(() => {
       nftContract.methods.mint(count).send({ from: walletAddress, gas: 300000 })
     })
   }
@@ -183,7 +236,7 @@ export default function Home() {
 
                   <button className='px-4 bg-greenn bg-opacity-100 text-gray-100 items-center relative h-12 tracking-wider pt-0.5 first::pt-0 duration-500 text-2xs md:text-base padding-huge opacity-100 hover:bg-opacity-100 rounded flex justify-center flex-row bg-gradient-to-tl hover:from-greenn from-peach to-peach hover:to-bluee border-none hover:shadow-green-500/20 cursor-pointer' id="walletButton"
 
-                    onClick={connectWalletPressed}
+                    onClick={connectWallet}
                   >Connect Wallet
                   </button>
                 )}
@@ -219,7 +272,7 @@ export default function Home() {
 
 
       {/* Hero/Mint Section */}
-      <section className="flex items-center justify-center bg-pattern py-12 px-5 overflow-hidden relative z-10" id="">
+      <section className="flex items-center justify-center bg-pattern py-12 px-5 overflow-hidden relative z-1" id="">
         <div className="">
           {/* margin between header and hero section */}
           <div className="mb-5 flex items-center max-w-md mt-4"></div>

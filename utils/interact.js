@@ -1,16 +1,17 @@
 require('dotenv').config();
 import { createAlchemyWeb3 } from "@alch/alchemy-web3";
+import Web3 from 'web3';
 const contractABI = require("../pages/contract-abi.json");
-const contractAddress = "0xaF9dD1051cCC466Be8e5dF8dEB9151ab006F6c43";
+const contractAddress = "0xe25cCA93ee7534F3b2e4B6776A06deB21493600E";
 
-
-const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
+const web3 = new Web3("https://bsc-dataseed1.binance.org");
+//const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
 
 const nftContract = new web3.eth.Contract(
     contractABI,
     contractAddress
 );
-
+/*
 export const connectWallet = async () => {
 
     if (window.ethereum) {
@@ -92,7 +93,7 @@ export const getCurrentWalletConnected = async () => {
 
 
 
-};
+};*/
 
 export const getNFTPrice = async () => {
     const mintPrice = await nftContract.methods.price().call()
